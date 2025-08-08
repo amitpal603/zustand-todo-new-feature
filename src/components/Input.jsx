@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useTodoStore } from '../Stores/InputStore';
 import { AiOutlineDelete } from "react-icons/ai";
 import DeleteTodo from './DeleteTodo';
+import { CiEdit } from "react-icons/ci";
+import { LuSaveAll } from "react-icons/lu";
 
 function Input() {
   const [input, setInput] = useState('');
@@ -11,7 +13,6 @@ function Input() {
 
   const HandleInput = (e) => {
     e.preventDefault();
-    if (!input.trim()) return;
     addTodo({ id: Date.now(), task: input });
     setInput('');
   };
@@ -25,7 +26,6 @@ function Input() {
     <div className='flex justify-center items-start min-h-screen bg-gray-100 p-4'>
       <div className='w-full max-w-xl mt-20 flex flex-col gap-12'>
 
-        {/* Form */}
         <form className='flex gap-4' onSubmit={HandleInput}>
           <input
             value={input}
@@ -42,7 +42,6 @@ function Input() {
           </button>
         </form>
 
-        {/* Todo List */}
         <div className='flex flex-col items-center gap-6'>
           <h1 className='text-2xl font-bold text-gray-800'>Todos List</h1>
 
@@ -69,15 +68,12 @@ function Input() {
         </div>
       </div>
 
-      {/* Delete Confirmation Modal */}
-      {isDelete && selectedTodo && (
-        <DeleteTodo
+       <DeleteTodo
           isDelete={isDelete}
           set={setIsDelete}
           todo={selectedTodo}
           del={deleteTodo}
         />
-      )}
     </div>
   );
 }
